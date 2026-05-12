@@ -225,6 +225,25 @@
     </div>
 </div>
 
+<script>
+        // 1. 強制網頁載入時回到頂端
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+
+        // 2. 處理網址錨點引發的跳轉問題
+        if (window.location.hash && window.location.hash.includes('cert-')) {
+            // 如果網址帶有證照 ID，先強制跳回首頁，避免直接看最後一頁
+            window.location.hash = ''; 
+        }
+
+        // 3. 解決捲動捕捉 (Scroll Snap) 的載入偏差
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('home').scrollIntoView();
+            }, 10);
+        });
+    </script>
 
 </body>
 </html>
